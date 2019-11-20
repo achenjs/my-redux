@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import { renderApp } from './store';
+
 import './App.css';
 
-function App() {
+function App(props) {
+  console.log(props);
+  const handleClick = (color) => () => {
+    props.store.changeState({
+      type: 'CHANGE_COLOR',
+      payload: color,
+    });
+    renderApp();
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="btn" onClick={handleClick('blue')}>Blue</div>
+      <div className="btn" onClick={handleClick('red')}>Red</div>
     </div>
   );
 }
