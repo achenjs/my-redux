@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore } from './store';
+import { createStore, reducer } from './store';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore();
+const store = createStore(reducer);
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 

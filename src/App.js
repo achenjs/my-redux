@@ -7,11 +7,11 @@ import './App.css';
 function App(props) {
   console.log(props);
   const handleClick = (color) => () => {
-    props.store.changeState({
+    props.store.dispatch({
       type: 'CHANGE_COLOR',
       payload: color,
     });
-    renderApp();
+    renderApp(props.store.getState());
   };
 
   return (

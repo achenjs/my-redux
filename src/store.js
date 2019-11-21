@@ -1,33 +1,35 @@
-let state = {
-  color: 'blue',
-};
+//  修改state
+function reducer(state, action) {
+  switch (action.type) {
+    case 'CHANGE_COLOR':
+      return {
+        ...state,
+        color: action.payload,
+      }
+    default:
+      return state;
+  }
+}
 
-function createStore (state) {
+function createStore(reducer) {
+  let state = {
+    color: 'blue',
+  };
   //  获取state
   const getState = () => state;
 
-  //  修改state
-  function changeState(action) {
-    switch (action.type) {
-      case 'CHANGE_COLOR':
-        return {
-          ...state,
-          color: action.payload,
-        }
-      default:
-        return state;
-    }
+  const dispatch = (action) => {
+    //  reducer 接收老状态和action，返回一个新状态
+    state = reducer(state, action);
   }
 
   return {
     getState,
-    changeState,
+    dispatch,
   };
 }
 
-
-
-function renderApp() {
+function renderApp(state) {
   const body = document.body;
   body.style.background = state.color;
 }
@@ -35,4 +37,5 @@ function renderApp() {
 export {
   renderApp,
   createStore,
+  reducer,
 }
